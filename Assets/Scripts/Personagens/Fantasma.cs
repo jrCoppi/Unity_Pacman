@@ -8,13 +8,20 @@ namespace Assets.Scripts.Personagens
 {
     class Fantasma
     {
-        private GameObject ghostObject;
+        public GameObject GhostObject { get; private set; }
+
         private Movimentos movimentos;
         public Fantasma(GameObject ghostObject)
         {
             movimentos = new Movimentos(ghostObject);
-            this.ghostObject = ghostObject;
-            this.ghostObject.transform.position = movimentos.Posicao();
+            this.GhostObject = ghostObject;
+            this.GhostObject.transform.position = movimentos.Posicao();
+        }
+        public Fantasma(GameObject ghostObject, int linha, int coluna)
+        {
+            movimentos = new Movimentos(ghostObject, linha, coluna);
+            this.GhostObject = ghostObject;
+            this.GhostObject.transform.position = movimentos.Posicao();
         }
     }
 }

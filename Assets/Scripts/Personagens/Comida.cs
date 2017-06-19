@@ -8,13 +8,20 @@ namespace Assets.Scripts.Personagens
 {
     class Comida
     {
-        private GameObject foodObject;
+        public GameObject FoodObject { get; private set; }
         private Movimentos movimentos;
         public Comida(GameObject foodObject)
         {
             movimentos = new Movimentos(foodObject);
-            this.foodObject = foodObject;
-            this.foodObject.transform.position = movimentos.Posicao();
+            FoodObject = foodObject;
+            FoodObject.transform.position = movimentos.Posicao();
+        }
+
+        public Comida(GameObject foodObject, int linha, int coluna)
+        {
+            movimentos = new Movimentos(foodObject, linha, coluna);
+            this.FoodObject = foodObject;
+            this.FoodObject.transform.position = movimentos.Posicao();
         }
     }
 }

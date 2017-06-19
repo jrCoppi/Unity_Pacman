@@ -4,7 +4,9 @@ namespace Assets.Scripts.Personagens
 {
     class Pacman
     {
-        private GameObject pacmanObject;
+        public GameObject PacmanObject { get; private set; }
+        public int Pontuacao { get; internal set; }
+
         private Movimentos movimentos;
         private int linhaInicial;
         private int colunaInicial;
@@ -14,8 +16,18 @@ namespace Assets.Scripts.Personagens
             movimentos = new Movimentos(pacmanObject, linhaInicial, colunaInicial);
             this.linhaInicial = linhaInicial;
             this.colunaInicial = colunaInicial;
-            this.pacmanObject = pacmanObject;
-            this.pacmanObject.transform.position = movimentos.Posicao();
+            PacmanObject = pacmanObject;
+            PacmanObject.transform.position = movimentos.Posicao();
         }
+
+        public void MoverEsquerda()
+        {
+            PacmanObject.transform.position = movimentos.Esquerda();
+        }
+        public void MoverDireita()
+        {
+            PacmanObject.transform.position = movimentos.Direita();
+        }
+
     }
 }
