@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Personagens
 {
@@ -29,5 +30,9 @@ namespace Assets.Scripts.Personagens
             PacmanObject.transform.position = movimentos.Direita();
         }
 
+        internal void MoverFrente()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -23,5 +23,10 @@ namespace Assets.Scripts.Personagens
             this.FoodObject = foodObject;
             this.FoodObject.transform.position = movimentos.Posicao();
         }
+
+        internal void MoverBaixo()
+        {
+            FoodObject.transform.position = movimentos.Descer();
+        }
     }
 }

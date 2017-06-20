@@ -24,7 +24,7 @@ public class Jogo : MonoBehaviour
         pacman = new Pacman(pacmanObject, 1, 3);
         fantasma = new Fantasma(fantasmaObject, 1, 1);
         comida = new Comida(comidaObject, 1, 5);
-        //StartCoroutine(TesteMovimento());
+        StartCoroutine(TesteMovimento());
     }
 
     public IEnumerator TesteMovimento()
@@ -40,13 +40,19 @@ public class Jogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //DetectLocation.Instance.atualiza();
-        //float distancia = DetectLocation.Instance.distance;
+        DetectLocation.Instance.atualiza();
+        float distancia = DetectLocation.Instance.distance;
         var direcao = Acelerometro.Instance.getDirecao();
-        if (direcao == 1)
+        if (distancia > 0)
+        {
+            fantasma.MoverBaixo();
+            comida.MoverBaixo();
+        }
+        else if (direcao == 1)
             pacman.MoverEsquerda();
         else if (direcao == 2)
             pacman.MoverDireita();
+        
         if (pacman.PacmanObject.IsColided(fantasma.GhostObject))
         {
             fantasma = new Fantasma(fantasma.GhostObject);

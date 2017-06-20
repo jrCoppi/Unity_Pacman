@@ -8,12 +8,12 @@ namespace Assets.Scripts
 {
     class Movimentos
     {
-        private const int columnNumbers = 5;
-        private const int rowNumbers = 4;
-        private const int minimumX = -4;
-        private const int maximumX = 4;
-        private const int minimumY = -3;
-        private const int maximumY = 3;
+        private const int columnNumbers = 4;
+        private const int rowNumbers = 3;
+        private const int minimumX = -2;
+        private const int maximumX = 2;
+        private const int minimumY = -1;
+        private const int maximumY = 1;
         private static int colunaAtual;
         private static int linhaAtual;
         private Vector3 personagemPosicao;//;

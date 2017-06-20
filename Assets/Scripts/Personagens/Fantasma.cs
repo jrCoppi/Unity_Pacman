@@ -23,5 +23,10 @@ namespace Assets.Scripts.Personagens
             this.GhostObject = ghostObject;
             this.GhostObject.transform.position = movimentos.Posicao();
         }
+
+        internal void MoverBaixo()
+        {
+            GhostObject.transform.position = movimentos.Descer();
+        }
     }
 }
