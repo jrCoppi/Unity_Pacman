@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Assets.Scripts;
 using Assets.Scripts.Personagens;
+using System.Threading;
 
 public class Jogo : MonoBehaviour
 {
@@ -43,15 +44,30 @@ public class Jogo : MonoBehaviour
         DetectLocation.Instance.atualiza();
         float distancia = DetectLocation.Instance.distance;
         var direcao = Acelerometro.Instance.getDirecao();
-        if (distancia > 0)
-        {
-            fantasma.MoverBaixo();
-            comida.MoverBaixo();
-        }
-        else if (direcao == 1)
-            pacman.MoverEsquerda();
-        else if (direcao == 2)
-            pacman.MoverDireita();
+		//Debug.Log(distancia);
+
+		if (distancia > 0.00001f)
+		{
+			fantasma.MoverBaixo();
+			comida.MoverBaixo();
+			//Thread.Sleep(0500);
+		}
+		else
+		{
+			switch (direcao)
+			{
+				case 1:
+					pacman.MoverEsquerda();
+					Thread.Sleep(300);
+					break;
+				case 2:
+					pacman.MoverDireita();
+					Thread.Sleep(300);
+					break;
+				default:
+					break;
+			}
+		}
         
         if (pacman.PacmanObject.IsColided(fantasma.GhostObject))
         {

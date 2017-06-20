@@ -26,8 +26,8 @@ public class DetectLocation : MonoBehaviour
         LocationService service = Input.location;
         if (!enableByRequest && !service.isEnabledByUser)
         {
-            UnityEditor.EditorUtility.DisplayDialog("Erro", "Location Services not enabled by user", "OK");
-            //Debug.Log("Location Services not enabled by user");
+            //UnityEditor.EditorUtility.DisplayDialog("Erro", "Location Services not enabled by user", "OK");
+            Debug.Log("Location Services not enabled by user");
         }
         service.Start(0.00001f, 0.00001f);
         while (service.status == LocationServiceStatus.Initializing && maxWait > 0)
@@ -36,13 +36,13 @@ public class DetectLocation : MonoBehaviour
         }
         if (maxWait < 1)
         {
-            UnityEditor.EditorUtility.DisplayDialog("Erro", ""Timed out "", "OK");
-            //Debug.Log("Timed out");
+            //UnityEditor.EditorUtility.DisplayDialog("Erro", "Timed out ", "OK");
+            Debug.Log("Timed out");
         }
         if (service.status == LocationServiceStatus.Failed)
         {
-            UnityEditor.EditorUtility.DisplayDialog("Erro", "Unable to determine device location", "OK");
-            //Debug.Log("Unable to determine device location");
+            //UnityEditor.EditorUtility.DisplayDialog("Erro", "Unable to determine device location", "OK");
+            Debug.Log("Unable to determine device location");
         }
         else {
             latitude = service.lastData.latitude;
@@ -66,7 +66,7 @@ public class DetectLocation : MonoBehaviour
         Vector2 deviceCoordinates = new Vector2(latitude, longitude);
         distance = Vector2.Distance(oldCoordinates, deviceCoordinates);
         float distanceFrom = 0.00001f;
-        if (distance >= distanceFrom)
+		if (distance >= distanceFrom)
         {
             oldLatitude = latitude;
             oldLongitude = longitude;
