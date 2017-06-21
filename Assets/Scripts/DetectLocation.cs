@@ -24,6 +24,7 @@ public class DetectLocation : MonoBehaviour
     private void getLocation()
     {
         LocationService service = Input.location;
+        
         if (!enableByRequest && !service.isEnabledByUser)
         {
             //UnityEditor.EditorUtility.DisplayDialog("Erro", "Location Services not enabled by user", "OK");
@@ -66,7 +67,7 @@ public class DetectLocation : MonoBehaviour
         Vector2 deviceCoordinates = new Vector2(latitude, longitude);
         distance = Vector2.Distance(oldCoordinates, deviceCoordinates);
         float distanceFrom = 0.00001f;
-		if (distance >= distanceFrom)
+        if (distance >= distanceFrom)
         {
             oldLatitude = latitude;
             oldLongitude = longitude;

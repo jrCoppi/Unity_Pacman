@@ -16,16 +16,19 @@ public class Jogo : MonoBehaviour
     private Pacman pacman;
     private Fantasma fantasma;
     private Comida comida;
+    public static bool Pressed { get; set; }
 
     void Start()
     {
+        Pressed = false;
         GameObject pacmanObject = FindObjectsOfType<GameObject>().First(x => x.name == "PacMan_1");
         GameObject fantasmaObject = FindObjectsOfType<GameObject>().First(x => x.name == "Fantasma");
         GameObject comidaObject = FindObjectsOfType<GameObject>().First(x => x.name == "comida");
         pacman = new Pacman(pacmanObject, 1, 3);
-        fantasma = new Fantasma(fantasmaObject, 1, 1);
-        comida = new Comida(comidaObject, 1, 5);
-        StartCoroutine(TesteMovimento());
+        fantasma = new Fantasma(fantasmaObject,3,2);
+        comida= new Comida(comidaObject, 3, 4);
+        
+        //StartCoroutine(TesteMovimento());
     }
 
     public IEnumerator TesteMovimento()
@@ -44,31 +47,32 @@ public class Jogo : MonoBehaviour
         DetectLocation.Instance.atualiza();
         float distancia = DetectLocation.Instance.distance;
         var direcao = Acelerometro.Instance.getDirecao();
-		//Debug.Log(distancia);
+        //Debug.Log(distancia);
 
-		if (distancia > 0.00001f)
-		{
-			fantasma.MoverBaixo();
-			comida.MoverBaixo();
-			//Thread.Sleep(0500);
-		}
-		else
-		{
-			switch (direcao)
-			{
-				case 1:
-					pacman.MoverEsquerda();
-					Thread.Sleep(300);
-					break;
-				case 2:
-					pacman.MoverDireita();
-					Thread.Sleep(300);
-					break;
-				default:
-					break;
-			}
-		}
-        
+        if (distancia > 0.00001f || Pressed)
+        {
+            fantasma.MoverBaixo();
+            comida.MoverBaixo();
+            Thread.Sleep(0500);
+            Pressed = false;
+        }
+        else
+        {
+            switch (direcao)
+            {
+                case 1:
+                    pacman.MoverEsquerda();
+                    Thread.Sleep(100);
+                    break;
+                case 2:
+                    pacman.MoverDireita();
+                    Thread.Sleep(100);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         if (pacman.PacmanObject.IsColided(fantasma.GhostObject))
         {
             fantasma = new Fantasma(fantasma.GhostObject);
